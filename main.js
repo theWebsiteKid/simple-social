@@ -33,6 +33,9 @@ let PostForm = () =>
                     placeholder: 'What\'s happening?'
                 }),
             ]),
+            h('button', { type: 'submit' }, [
+                'Post'
+            ]),
         ]),
     ]);
 
