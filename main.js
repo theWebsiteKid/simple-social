@@ -1,9 +1,10 @@
 const h = React.createElement;
 
-
+// generate random ID number to string
 let generateID = () =>
     Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString();
 
+// list of initial posts
 const initPosts = [
     {
         id: 1,
@@ -32,7 +33,7 @@ const initPosts = [
     },
 ];
 
-// smart components (class, methods, stateful)
+// smart components (classes, methods, stateful)
 class Homepage extends React.Component {
     // es6 constructor
     constructor(props) {
@@ -57,10 +58,10 @@ class Homepage extends React.Component {
                 ])
             });
         };
-        // render to homepage
+        // render to homepage component
         return h('div', {},
             h(Header),
-            h(PostForm, {addPost: addPost} ),
+            h(PostForm, { addPost: addPost }),
             h(PostList, { posts: this.state.posts }),
             h(Footer),
         );
@@ -79,13 +80,15 @@ class PostForm extends React.Component {
         };
     };
 
-    render() { 
+    render() {
+        // render to post form component
         return h('div', { className: 'post-form' },
             h('form', {
                 onSubmit: (event) => {
                     event.preventDefault();
                     this.props.addPost(this.state.newUser, this.state.newPost);
-                    console.log('submit!');
+                    this.state.newUser = '';
+                    this.state.newPost = '';
                 },
             },
                 h('label', {},
@@ -99,7 +102,6 @@ class PostForm extends React.Component {
                         required: 'required',
                         onChange: (event) => {
                             let value = event.target.value;
-                            console.log(value);
                             this.setState({ newUser: value });
                         }
                     }),
@@ -115,7 +117,6 @@ class PostForm extends React.Component {
                         required: 'required',
                         onChange: (event) => {
                             let value = event.target.value;
-                            console.log(value);
                             this.setState({ newPost: value });
                         }
                     }),
@@ -161,4 +162,5 @@ let Footer = () =>
         ),
     );   
 
+// render entire Homepage to root div in index.html
 ReactDOM.render(h(Homepage), document.querySelector('.react-root'));
