@@ -3,18 +3,28 @@ const h = React.createElement;
 const initPosts = [
     {
         id: 1,
-        name: '@theWebsiteKid',
-        msg: 'Hello World!'
+        name: 'theWebsiteKid',
+        msg: '⚡️ nobody cares'
     },
     {
         id: 2,
-        name: '@nybblr',
-        msg: 'Hello Landscapes!'
+        name: 'nybblr',
+        msg: 'Landscapes!'
     },
     {
         id: 3,
-        name: '@nat-sharpe',
+        name: 'nat-sharpe',
         msg: 'Hello Nordic!'
+    },
+    {
+        id: 4,
+        name: 'JamesBlake223',
+        msg: 'Musiq Souls change lives.'
+    },
+    {
+        id: 5,
+        name: 'ghostBusta99',
+        msg: 'who you gonna call?'
     },
 ];
 
@@ -59,7 +69,12 @@ let Header = () =>
     );
 
 let PostForm = props =>
-    h('form', {},
+    h('form', {
+        onSubmit: (event) => {
+            event.preventDefault();
+            console.log('submit!');
+        },
+    },
         h('label', {},
             'Name ',
             h('input', { 
@@ -67,7 +82,11 @@ let PostForm = props =>
                 id: 'name',
                 name: 'name',
                 placeholder: 'Alex Smith',
-                required: 'required'
+                required: 'required',
+                onChange: (event) => {
+                    let value = event.target.value;
+                    console.log(value);
+                }
             }),
         ),
         h('label', {},
@@ -77,34 +96,31 @@ let PostForm = props =>
                 id: 'msg',
                 name: 'msg',
                 placeholder: 'What\'s happening?',
-                required: 'required'
+                required: 'required',
+                onChange: (event) => {
+                    let value = event.target.value;
+                    console.log(value);
+                }
             }),
         ),
-        h('button', { 
+        h('input', { 
             type: 'submit',
-            onClick: () => {
-                props.addPost(props.post);
-            },
-        },
-            'Post'
-        ),
+            value: 'Post',
+        }),
     );
 
-let PostList = () =>
-    h('div', {},
-        h('h2', {},
-            'PostList works!'
-        ),
-        h(PostRow),
-        h(PostRow),
-        h(PostRow),
+let PostList = props =>
+    h('ul', { className: 'post-list' },
+        props.posts.map(post => h(PostRow, {
+            post,
+            addPost: props.addPost,
+        })),
     );
 
-let PostRow = () =>
-    h('div', {}, 
-        h('p', {},
-            'PostRow works!'
-        ),
+let PostRow = props =>
+    h('li', { className: 'post-list-item' },
+        h('h3', {}, '@' + props.post.name + ': '),
+        h('p', {}, props.post.msg),
     );
 
 let Footer = () =>

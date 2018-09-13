@@ -1,0 +1,12 @@
+.post-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none; }
+
+.post-list-item {
+    margin: 0;
+    padding: 1.00em;
+    background: #fff; }
+
+.post-list-item:nth-child(even) {
+        background-color: #eee; }
