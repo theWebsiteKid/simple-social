@@ -29,12 +29,22 @@ class Homepage extends React.Component {
             posts: initPosts
         };
     };
-    // render to homepage
+    
     render() {
+        // actions
+        let addPost = (postToList) => {
+            this.setState({
+                posts: this.state.posts.map(post => post.id !== postToList.id)
+            });
+        };
+        // render to homepage
         return h('div', {},
             h(Header),
             h(PostForm),
-            h(PostList),
+            h(PostList, {
+                posts: this.state.posts,
+                addPost: addPost,
+            }),
             h(Footer),
         );
     };
@@ -48,7 +58,7 @@ let Header = () =>
         ),
     );
 
-let PostForm = () =>
+let PostForm = props =>
     h('form', {},
         h('label', {},
             'Name ',
@@ -56,7 +66,8 @@ let PostForm = () =>
                 type: 'text',
                 id: 'name',
                 name: 'name',
-                placeholder: 'Alex Smith' 
+                placeholder: 'Alex Smith',
+                required: 'required'
             }),
         ),
         h('label', {},
@@ -65,10 +76,16 @@ let PostForm = () =>
                 type: 'text',
                 id: 'msg',
                 name: 'msg',
-                placeholder: 'What\'s happening?'
+                placeholder: 'What\'s happening?',
+                required: 'required'
             }),
         ),
-        h('button', { type: 'submit' },
+        h('button', { 
+            type: 'submit',
+            onClick: () => {
+                props.addPost(props.post);
+            },
+        },
             'Post'
         ),
     );
