@@ -22,6 +22,17 @@ let PostForm = () =>
                     placeholder: 'Alex Smith' 
                 }),
             ]),
+            h('div', {}, [
+                h('label', { for: 'msg' }, [
+                    'Message '
+                ]),
+                h('input', {
+                    type: 'text',
+                    id: 'msg',
+                    name: 'msg',
+                    placeholder: 'What\'s happening?'
+                }),
+            ]),
         ]),
     ]);
 
