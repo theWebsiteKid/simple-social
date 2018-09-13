@@ -16,7 +16,7 @@ const initPosts = [
         name: '@nat-sharpe',
         msg: 'Hello Nordic!'
     },
-]
+];
 
 // smart components (class, methods, stateful)
 class Homepage extends React.Component {
@@ -25,10 +25,10 @@ class Homepage extends React.Component {
         // super(props) gives us this.props = props
         super(props);
         // init app state
-        this.state = [
-            
-        ]
-    }
+        this.state = {
+            posts: initPosts
+        };
+    };
     // render to homepage
     render() {
         return h('div', {}, [
