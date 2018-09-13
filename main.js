@@ -13,6 +13,16 @@ let PostList = () =>
         h('h2', {}, [
             'PostList works!'
         ]),
+        h(PostRow),
+        h(PostRow),
+        h(PostRow),
+    ]);
+
+let PostRow = () =>
+    h('div', {}, [
+        h('p', {}, [
+            'PostRow works!'
+        ]),
     ]);
 
 let Homepage = () =>
