@@ -1,29 +1,33 @@
 const h = React.createElement;
 
+
+let generateID = () =>
+    Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString();
+
 const initPosts = [
     {
         id: 1,
-        name: 'theWebsiteKid',
+        user: 'theWebsiteKid',
         body: '⚡️ nobody cares'
     },
     {
         id: 2,
-        name: 'nybblr',
+        user: 'nybblr',
         body: 'Landscapes!'
     },
     {
         id: 3,
-        name: 'nat-sharpe',
+        user: 'nat-sharpe',
         body: 'Hello Nordic!'
     },
     {
         id: 4,
-        name: 'JamesBlake223',
+        user: 'JamesBlake223',
         body: 'Musiq Souls change lives.'
     },
     {
         id: 5,
-        name: 'ghostBusta99',
+        user: 'ghostBusta99',
         body: 'who you gonna call?'
     },
 ];
@@ -42,19 +46,22 @@ class Homepage extends React.Component {
     
     render() {
         // actions
-        let addPost = (postToList) => {
+        let addPost = (newPost) => {
             this.setState({
-                posts: this.state.posts.map(post => post.id !== postToList.id)
+                post: this.state.posts.concat([
+                    {
+                        id: generateID(),
+                        user: newUser,
+                        body: newPost,
+                    }
+                ])
             });
         };
         // render to homepage
         return h('div', {},
             h(Header),
-            h(PostForm),
-            h(PostList, {
-                posts: this.state.posts,
-                addPost: addPost,
-            }),
+            h(PostForm, {addPost: addPost} ),
+            h(PostList, { posts: this.state.posts }),
             h(Footer),
         );
     };
@@ -67,7 +74,8 @@ class PostForm extends React.Component {
         super(props);
         // init app state
         this.state = {
-            newPosts: ''
+            newUser: '',
+            newPost: ''
         };
     };
 
@@ -75,6 +83,8 @@ class PostForm extends React.Component {
         return h('form', {
             onSubmit: (event) => {
                 event.preventDefault();
+                this.props.addPost(this.state.newUser);
+                this.props.addPost(this.state.newPost);
                 console.log('submit!');
             },
         },
@@ -82,6 +92,7 @@ class PostForm extends React.Component {
                 'Name ',
                 h('input', { 
                     type: 'text',
+                    value: this.state.newUser,
                     id: 'name',
                     name: 'name',
                     placeholder: 'Alex Smith',
@@ -89,6 +100,7 @@ class PostForm extends React.Component {
                     onChange: (event) => {
                         let value = event.target.value;
                         console.log(value);
+                        this.setState({ newUser: value });
                     }
                 }),
             ),
@@ -96,7 +108,7 @@ class PostForm extends React.Component {
                 'Message ',
                 h('input', {
                     type: 'text',
-                    value: this.state.newPosts,
+                    value: this.state.newPost,
                     id: 'msg',
                     name: 'msg',
                     placeholder: 'What\'s happening?',
@@ -134,7 +146,7 @@ let PostList = props =>
 
 let PostRow = props =>
     h('li', { className: 'post-list-item' },
-        h('h3', {}, '@' + props.post.name + ': '),
+        h('h3', {}, '@' + props.post.user + ': '),
         h('p', {}, props.post.body),
     );
 
