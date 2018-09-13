@@ -1,7 +1,35 @@
 const h = React.createElement;
 
+const initPosts = [
+    {
+        id: 1,
+        name: '@theWebsiteKid',
+        msg: 'Hello World!'
+    },
+    {
+        id: 2,
+        name: '@nybblr',
+        msg: 'Hello Landscapes!'
+    },
+    {
+        id: 3,
+        name: '@nat-sharpe',
+        msg: 'Hello Nordic!'
+    },
+]
+
 // smart components (class, methods, stateful)
 class Homepage extends React.Component {
+    // es6 constructor
+    constructor(props) {
+        // super(props) gives us this.props = props
+        super(props);
+        // init app state
+        this.state = [
+            
+        ]
+    }
+    // render to homepage
     render() {
         return h('div', {}, [
             h(Header),
