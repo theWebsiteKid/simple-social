@@ -31,26 +31,26 @@ class Homepage extends React.Component {
     };
     // render to homepage
     render() {
-        return h('div', {}, [
+        return h('div', {},
             h(Header),
             h(PostForm),
             h(PostList),
             h(Footer),
-        ]);
+        );
     };
 };
 
 // dumb, presentational components (pure functions, stateless)
 let Header = () =>
-    h('div', {}, [
-        h('h1', {}, [
-            '🔥SimpleSocial'
-        ]),
-    ]);
+    h('div', {},
+        h('h1', {},
+            '🔥SimpleSocial',
+        ),
+    );
 
 let PostForm = () =>
-    h('form', {}, [
-        h('label', { for: 'name' }, [
+    h('form', {},
+        h('label', {},
             'Name ',
             h('input', { 
                 type: 'text',
@@ -58,8 +58,8 @@ let PostForm = () =>
                 name: 'name',
                 placeholder: 'Alex Smith' 
             }),
-        ]),
-        h('label', { for: 'msg' }, [
+        ),
+        h('label', {},
             'Message ',
             h('input', {
                 type: 'text',
@@ -67,37 +67,37 @@ let PostForm = () =>
                 name: 'msg',
                 placeholder: 'What\'s happening?'
             }),
-        ]),
-        h('button', { type: 'submit' }, [
+        ),
+        h('button', { type: 'submit' },
             'Post'
-        ]),
-    ]);
+        ),
+    );
 
 let PostList = () =>
-    h('div', {}, [
-        h('h2', {}, [
+    h('div', {},
+        h('h2', {},
             'PostList works!'
-        ]),
+        ),
         h(PostRow),
         h(PostRow),
         h(PostRow),
-    ]);
+    );
 
 let PostRow = () =>
-    h('div', {}, [
-        h('p', {}, [
+    h('div', {}, 
+        h('p', {},
             'PostRow works!'
-        ]),
-    ]);
+        ),
+    );
 
 let Footer = () =>
-    h('div', {}, [
-        h('p', {}, [
+    h('div', {},
+        h('p', {},
             '© 2018 | ',
-            h('a', { href: 'http://xavierduncan.com', target: '_blank' }, [
+            h('a', { href: 'http://xavierduncan.com', target: '_blank' },
                 'Crafted with ⚡️ by @theWebsiteKid'
-            ]),
-        ]),
-    ]);   
+            ),
+        ),
+    );   
 
 ReactDOM.render(h(Homepage), document.querySelector('.react-root'));
