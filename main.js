@@ -46,9 +46,9 @@ class Homepage extends React.Component {
     
     render() {
         // actions
-        let addPost = (newPost) => {
+        let addPost = (newUser, newPost) => {
             this.setState({
-                post: this.state.posts.concat([
+                posts: this.state.posts.concat([
                     {
                         id: generateID(),
                         user: newUser,
@@ -75,62 +75,63 @@ class PostForm extends React.Component {
         // init app state
         this.state = {
             newUser: '',
-            newPost: ''
+            newPost: '',
         };
     };
 
     render() { 
-        return h('form', {
-            onSubmit: (event) => {
-                event.preventDefault();
-                this.props.addPost(this.state.newUser);
-                this.props.addPost(this.state.newPost);
-                console.log('submit!');
+        return h('div', { className: 'post-form' },
+            h('form', {
+                onSubmit: (event) => {
+                    event.preventDefault();
+                    this.props.addPost(this.state.newUser, this.state.newPost);
+                    console.log('submit!');
+                },
             },
-        },
-            h('label', {},
-                'Name ',
+                h('label', {},
+                    'Name ',
+                    h('input', { 
+                        type: 'text',
+                        value: this.state.newUser,
+                        id: 'name',
+                        name: 'name',
+                        placeholder: 'Alex Smith',
+                        required: 'required',
+                        onChange: (event) => {
+                            let value = event.target.value;
+                            console.log(value);
+                            this.setState({ newUser: value });
+                        }
+                    }),
+                ),
+                h('label', {},
+                    'Message ',
+                    h('input', {
+                        type: 'text',
+                        value: this.state.newPost,
+                        id: 'msg',
+                        name: 'msg',
+                        placeholder: 'What\'s happening?',
+                        required: 'required',
+                        onChange: (event) => {
+                            let value = event.target.value;
+                            console.log(value);
+                            this.setState({ newPost: value });
+                        }
+                    }),
+                ),
                 h('input', { 
-                    type: 'text',
-                    value: this.state.newUser,
-                    id: 'name',
-                    name: 'name',
-                    placeholder: 'Alex Smith',
-                    required: 'required',
-                    onChange: (event) => {
-                        let value = event.target.value;
-                        console.log(value);
-                        this.setState({ newUser: value });
-                    }
+                    type: 'submit',
+                    value: 'Post',
                 }),
-            ),
-            h('label', {},
-                'Message ',
-                h('input', {
-                    type: 'text',
-                    value: this.state.newPost,
-                    id: 'msg',
-                    name: 'msg',
-                    placeholder: 'What\'s happening?',
-                    required: 'required',
-                    onChange: (event) => {
-                        let value = event.target.value;
-                        console.log(value);
-                        this.setState({ newPost: value });
-                    }
-                }),
-            ),
-            h('input', { 
-                type: 'submit',
-                value: 'Post',
-            }),
+            )
         );
     };
 };
 
 // dumb, presentational components (pure functions, stateless)
 let Header = () =>
-    h('div', {},
+    h('div', { className: 'header' },
         h('h1', {},
             '🔥SimpleSocial',
         ),
@@ -141,7 +142,7 @@ let PostList = props =>
         props.posts.map(post => h(PostRow, {
             post,
             addPost: props.addPost,
-        })),
+        })).reverse(),
     );
 
 let PostRow = props =>
@@ -151,7 +152,7 @@ let PostRow = props =>
     );
 
 let Footer = () =>
-    h('div', {},
+    h('div', { className: 'footer' },
         h('p', {},
             '© 2018 | ',
             h('a', { href: 'http://xavierduncan.com', target: '_blank' },
