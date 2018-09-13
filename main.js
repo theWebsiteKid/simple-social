@@ -4,27 +4,27 @@ const initPosts = [
     {
         id: 1,
         name: 'theWebsiteKid',
-        msg: '⚡️ nobody cares'
+        body: '⚡️ nobody cares'
     },
     {
         id: 2,
         name: 'nybblr',
-        msg: 'Landscapes!'
+        body: 'Landscapes!'
     },
     {
         id: 3,
         name: 'nat-sharpe',
-        msg: 'Hello Nordic!'
+        body: 'Hello Nordic!'
     },
     {
         id: 4,
         name: 'JamesBlake223',
-        msg: 'Musiq Souls change lives.'
+        body: 'Musiq Souls change lives.'
     },
     {
         id: 5,
         name: 'ghostBusta99',
-        msg: 'who you gonna call?'
+        body: 'who you gonna call?'
     },
 ];
 
@@ -60,6 +60,62 @@ class Homepage extends React.Component {
     };
 };
 
+class PostForm extends React.Component {
+    // es6 constructor
+    constructor(props) {
+        // super(props) gives us this.props = props
+        super(props);
+        // init app state
+        this.state = {
+            newPosts: ''
+        };
+    };
+
+    render() { 
+        return h('form', {
+            onSubmit: (event) => {
+                event.preventDefault();
+                console.log('submit!');
+            },
+        },
+            h('label', {},
+                'Name ',
+                h('input', { 
+                    type: 'text',
+                    id: 'name',
+                    name: 'name',
+                    placeholder: 'Alex Smith',
+                    required: 'required',
+                    onChange: (event) => {
+                        let value = event.target.value;
+                        console.log(value);
+                    }
+                }),
+            ),
+            h('label', {},
+                'Message ',
+                h('input', {
+                    type: 'text',
+                    value: this.state.newPosts,
+                    id: 'msg',
+                    name: 'msg',
+                    placeholder: 'What\'s happening?',
+                    required: 'required',
+                    onChange: (event) => {
+                        let value = event.target.value;
+                        console.log(value);
+                        this.setState({ newPost: value });
+                    }
+                }),
+            ),
+            h('input', { 
+                type: 'submit',
+                value: 'Post',
+            }),
+        );
+    };
+};
+
 // dumb, presentational components (pure functions, stateless)
 let Header = () =>
     h('div', {},
@@ -67,48 +123,7 @@ let Header = () =>
             '🔥SimpleSocial',
         ),
     );
-
-let PostForm = props =>
-    h('form', {
-        onSubmit: (event) => {
-            event.preventDefault();
-            console.log('submit!');
-        },
-    },
-        h('label', {},
-            'Name ',
-            h('input', { 
-                type: 'text',
-                id: 'name',
-                name: 'name',
-                placeholder: 'Alex Smith',
-                required: 'required',
-                onChange: (event) => {
-                    let value = event.target.value;
-                    console.log(value);
-                }
-            }),
-        ),
-        h('label', {},
-            'Message ',
-            h('input', {
-                type: 'text',
-                id: 'msg',
-                name: 'msg',
-                placeholder: 'What\'s happening?',
-                required: 'required',
-                onChange: (event) => {
-                    let value = event.target.value;
-                    console.log(value);
-                }
-            }),
-        ),
-        h('input', { 
-            type: 'submit',
-            value: 'Post',
-        }),
-    );
-
+    
 let PostList = props =>
     h('ul', { className: 'post-list' },
         props.posts.map(post => h(PostRow, {
@@ -120,7 +135,7 @@ let PostList = props =>
 let PostRow = props =>
     h('li', { className: 'post-list-item' },
         h('h3', {}, '@' + props.post.name + ': '),
-        h('p', {}, props.post.msg),
+        h('p', {}, props.post.body),
     );
 
 let Footer = () =>
