@@ -4,7 +4,7 @@ const h = React.createElement;
 let Header = () =>
     h('div', {}, [
         h('h1', {}, [
-            '🔥 SimpleSocial'
+            '🔥SimpleSocial'
         ]),
     ]);
 
@@ -25,10 +25,21 @@ let PostRow = () =>
         ]),
     ]);
 
+let Footer = () =>
+    h('div', {}, [
+        h('p', {}, [
+            '© 2018 | ',
+            h('a', { href: 'http://xavierduncan.com', target: '_blank' }, [
+                'Crafter with ⚡️ by @theWebsiteKid'
+            ]),
+        ]),
+    ]);
+
 let Homepage = () =>
     h('div', {}, [
         h(Header),
         h(PostList),
+        h(Footer),
     ]);
 
 ReactDOM.render(h(Homepage), document.querySelector('.react-root'));
