@@ -8,6 +8,23 @@ let Header = () =>
         ]),
     ]);
 
+let PostForm = () =>
+    h('div', {}, [
+        h('form', {}, [
+            h('div', {}, [
+                h('label', { for: 'name' }, [
+                    'Name '
+                ]),
+                h('input', { 
+                    type: 'text',
+                    id: 'name',
+                    name: 'name',
+                    placeholder: 'Alex Smith' 
+                }),
+            ]),
+        ]),
+    ]);
+
 let PostList = () =>
     h('div', {}, [
         h('h2', {}, [
@@ -38,6 +55,7 @@ let Footer = () =>
 let Homepage = () =>
     h('div', {}, [
         h(Header),
+        h(PostForm),
         h(PostList),
         h(Footer),
     ]);
