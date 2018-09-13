@@ -1,5 +1,17 @@
 const h = React.createElement;
 
+// smart components (class, methods, stateful)
+class Homepage extends React.Component {
+    render() {
+        return h('div', {}, [
+            h(Header),
+            h(PostForm),
+            h(PostList),
+            h(Footer),
+        ]);
+    };
+};
+
 // dumb, presentational components (pure functions, stateless)
 let Header = () =>
     h('div', {}, [
@@ -9,33 +21,27 @@ let Header = () =>
     ]);
 
 let PostForm = () =>
-    h('div', {}, [
-        h('form', {}, [
-            h('div', {}, [
-                h('label', { for: 'name' }, [
-                    'Name '
-                ]),
-                h('input', { 
-                    type: 'text',
-                    id: 'name',
-                    name: 'name',
-                    placeholder: 'Alex Smith' 
-                }),
-            ]),
-            h('div', {}, [
-                h('label', { for: 'msg' }, [
-                    'Message '
-                ]),
-                h('input', {
-                    type: 'text',
-                    id: 'msg',
-                    name: 'msg',
-                    placeholder: 'What\'s happening?'
-                }),
-            ]),
-            h('button', { type: 'submit' }, [
-                'Post'
-            ]),
+    h('form', {}, [
+        h('label', { for: 'name' }, [
+            'Name ',
+            h('input', { 
+                type: 'text',
+                id: 'name',
+                name: 'name',
+                placeholder: 'Alex Smith' 
+            }),
+        ]),
+        h('label', { for: 'msg' }, [
+            'Message ',
+            h('input', {
+                type: 'text',
+                id: 'msg',
+                name: 'msg',
+                placeholder: 'What\'s happening?'
+            }),
+        ]),
+        h('button', { type: 'submit' }, [
+            'Post'
         ]),
     ]);
 
@@ -61,17 +67,9 @@ let Footer = () =>
         h('p', {}, [
             '© 2018 | ',
             h('a', { href: 'http://xavierduncan.com', target: '_blank' }, [
-                'Crafter with ⚡️ by @theWebsiteKid'
+                'Crafted with ⚡️ by @theWebsiteKid'
             ]),
         ]),
-    ]);
-
-let Homepage = () =>
-    h('div', {}, [
-        h(Header),
-        h(PostForm),
-        h(PostList),
-        h(Footer),
-    ]);
+    ]);   
 
 ReactDOM.render(h(Homepage), document.querySelector('.react-root'));
