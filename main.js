@@ -137,13 +137,13 @@ let Header = () =>
     </div>;
     
 let PostList = props =>
-    h('ul', { className: 'post-list' },
-        props.posts.map(post => h(PostRow, {
+    <ul className='post-list'>
+        { props.posts.map(post => h(PostRow, {
             post,
             addPost: props.addPost,
             key: post.id
-        })).reverse(),
-    );
+        })).reverse() }
+    </ul>;
 
 let PostRow = props =>
     h('li', { className: 'post-list-item' },
