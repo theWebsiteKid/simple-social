@@ -146,10 +146,10 @@ let PostList = props =>
     </ul>;
 
 let PostRow = props =>
-    h('li', { className: 'post-list-item' },
-        h('h3', {}, '@' + props.post.user + ': '),
-        h('p', {}, props.post.body),
-    );
+    <li className='post-list-item'>
+        <h3>{'@' + props.post.user + ': '}</h3>
+        <p>{props.post.body}</p>
+    </li>;
 
 let Footer = () =>
     h('div', { className: 'footer' },
