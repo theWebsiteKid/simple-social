@@ -152,14 +152,14 @@ let PostRow = props =>
     </li>;
 
 let Footer = () =>
-    h('div', { className: 'footer' },
-        h('p', {},
-            '© 2018 | ',
-            h('a', { href: 'http://xavierduncan.com', target: '_blank' },
-                'Crafted with ⚡️ by @theWebsiteKid'
-            ),
-        ),
-    );   
+    <div className='footer'>
+        <p>
+            © 2018 | &nbsp;
+            <a href='http://xavierduncan.com' target='_blank'>
+                Crafted with ⚡️ by @theWebsiteKid
+            </a>
+        </p>
+    </div>;   
 
 // render entire Homepage to root div in index.html
 ReactDOM.render(h(Homepage), document.querySelector('.react-root'));
