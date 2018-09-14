@@ -82,7 +82,7 @@ class PostForm extends React.Component {
 
     render() {
         // render to post form component
-        return h('div', { className: 'post-form' },
+        return h('div', {},
             h('form', {
                 onSubmit: (event) => {
                     event.preventDefault();
@@ -143,6 +143,7 @@ let PostList = props =>
         props.posts.map(post => h(PostRow, {
             post,
             addPost: props.addPost,
+            key: post.id
         })).reverse(),
     );
 
