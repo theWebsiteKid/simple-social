@@ -132,11 +132,9 @@ class PostForm extends React.Component {
 
 // dumb, presentational components (pure functions, stateless)
 let Header = () =>
-    h('div', { className: 'header' },
-        h('h1', {},
-            '🔥SimpleSocial',
-        ),
-    );
+    <div className='header'>
+        <h1>🔥SimpleSocial</h1>
+    </div>;
     
 let PostList = props =>
     h('ul', { className: 'post-list' },
