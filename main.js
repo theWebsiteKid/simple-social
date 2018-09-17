@@ -59,11 +59,13 @@ class Homepage extends React.Component {
             });
         };
         // render to homepage component
-        return h('div', {},
-            h(Header),
-            h(PostForm, { addPost: addPost }),
-            h(PostList, { posts: this.state.posts }),
-            h(Footer),
+        return (
+            <div>
+                <Header/>
+                <PostForm addPost={addPost}/>
+                <PostList posts={this.state.posts}/>
+                <Footer/>
+            </div>
         );
     };
 };
@@ -162,4 +164,4 @@ let Footer = () =>
     </div>;   
 
 // render entire Homepage to root div in index.html
-ReactDOM.render(h(Homepage), document.querySelector('.react-root'));
+ReactDOM.render(<Homepage/>, document.querySelector('.react-root'));
